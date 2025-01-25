@@ -4,9 +4,6 @@
     "ComponentPublicInstance": true,
     "ComputedRef": true,
     "EffectScope": true,
-    "ElLoading": true,
-    "ElMessage": true,
-    "ElMessageBox": true,
     "InjectionKey": true,
     "PropType": true,
     "Ref": true,
@@ -269,6 +266,20 @@
     "watchSyncEffect": true,
     "watchThrottled": true,
     "watchWithFilter": true,
-    "whenever": true
+    "whenever": true,
+    "DirectiveBinding": true,
+    "ExtractDefaultPropTypes": true,
+    "ExtractPropTypes": true,
+    "ExtractPublicPropTypes": true,
+    "MaybeRef": true,
+    "MaybeRefOrGetter": true,
+    "WritableComputedRef": true,
+    "onWatcherCleanup": true,
+    "toValue": true,
+    "useId": true,
+    "useModel": true,
+    "useTemplateRef": true,
+    "ElMessage": true,
+    "ElMessageBox": true
   }
 }

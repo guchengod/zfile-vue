@@ -57,7 +57,6 @@ body,
 	border-radius: 10px;
 }
 
-
 .icon {
 	width: 1em;
 	height: 1em;
@@ -66,14 +65,13 @@ body,
 	overflow: hidden;
 }
 
-.dragging-over *{
+.dragging-over * {
 	pointer-events: none;
 }
 
 #v3-img-preview-container-id .v-images-wrap .arrow .icon {
 	display: initial;
 }
-
 
 #v3-img-preview-container-id .img-container .img-content {
 	max-width: 95%;
@@ -92,7 +90,7 @@ body,
 }
 
 @media screen and (max-width: 500px) {
-	.el-message-box{
+	.el-message-box {
 		width: calc(100% - 30px) !important;
 	}
 }

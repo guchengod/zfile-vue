@@ -3,7 +3,7 @@
 		<el-tooltip placement="top" content="回到顶部">
 			<transition name="fade">
 				<el-icon>
-					<CaretTop/>
+					<CaretTop />
 				</el-icon>
 			</transition>
 		</el-tooltip>
@@ -11,9 +11,7 @@
 </template>
 
 <script setup>
-import {CaretTop} from "@element-plus/icons-vue";
+import { CaretTop } from '@element-plus/icons-vue'
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

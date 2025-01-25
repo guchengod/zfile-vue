@@ -1,11 +1,14 @@
 <template>
-	<el-dialog v-model="isShow" :destroy-on-close="true"
-	           @close="closeDialog"
-	           :title="props.title"
-	           :show-close="false"
-	           draggable
-	           top="5vh"
-	           width="80%">
+	<el-dialog
+		v-model="isShow"
+		:destroy-on-close="true"
+		@close="closeDialog"
+		:title="props.title"
+		:show-close="false"
+		draggable
+		top="5vh"
+		width="80%"
+	>
 		<v-md-editor v-model="readmeText" height="70vh"></v-md-editor>
 		<template #footer>
 			<span class="dialog-footer">
@@ -16,24 +19,24 @@
 	</el-dialog>
 </template>
 
-
 <script setup>
-
 // markdown editor 组件懒加载, 节约首屏打开时间
 const VMdEditor = defineAsyncComponent(() => {
 	return new Promise((resolve, reject) => {
 		;(async function () {
 			try {
 				const res = await import('@kangc/v-md-editor')
-				await import('@kangc/v-md-editor/lib/style/base-editor.css');
-				await import('@kangc/v-md-editor/lib/theme/style/vuepress.css');
+				await import('@kangc/v-md-editor/lib/style/base-editor.css')
+				await import('@kangc/v-md-editor/lib/theme/style/vuepress.css')
 
-				const vuepressTheme = await import('@kangc/v-md-editor/lib/theme/vuepress.js');
-				const Prism = await import('prismjs');
+				const vuepressTheme = await import(
+					'@kangc/v-md-editor/lib/theme/vuepress.js'
+				)
+				const Prism = await import('prismjs')
 
 				res.use(vuepressTheme, {
 					Prism,
-				});
+				})
 
 				resolve(res)
 			} catch (error) {
@@ -43,14 +46,13 @@ const VMdEditor = defineAsyncComponent(() => {
 	})
 })
 
-
-const readmeText = ref('');
-const isShow = true;
+const readmeText = ref('')
+const isShow = true
 
 const props = defineProps({
 	visible: {
 		type: Boolean,
-		required: true
+		required: true,
 	},
 	title: {
 		type: String,
@@ -59,17 +61,17 @@ const props = defineProps({
 	modelValue: {
 		type: String,
 		default: '',
-	}
-});
+	},
+})
 
 const emit = defineEmits(['update:modelValue', 'update:visible'])
 
 onMounted(() => {
-	readmeText.value = props.modelValue;
+	readmeText.value = props.modelValue
 })
 
 const closeDialog = () => {
-	emit('update:visible', false);
+	emit('update:visible', false)
 }
 
 const saveDialog = () => {
@@ -78,7 +80,4 @@ const saveDialog = () => {
 }
 </script>
 
-
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

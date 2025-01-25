@@ -7,23 +7,21 @@ import Inspect from 'vite-plugin-inspect'
 import Markdown from './plugins/markdown'
 // import Windicss from 'vite-plugin-windicss'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import Removelog from 'vite-plugin-removelog'
 import ViteRestart from 'vite-plugin-restart'
-import I18n from '@intlify/vite-plugin-vue-i18n'
 import { viteMockServe } from 'vite-plugin-mock'
 import Layouts from 'vite-plugin-vue-meta-layouts'
 import AutoImport from 'unplugin-auto-import/vite'
 import IconsResolver from 'unplugin-icons/resolver'
-import {FileSystemIconLoader} from "unplugin-icons/loaders";
+import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 import Components from 'unplugin-vue-components/vite'
 import viteCompression from 'vite-plugin-compression'
 // import { markdownWrapperClasses } from './plugins/markdown'
 import legacy from '@vitejs/plugin-legacy'
 
-import visualizer from "rollup-plugin-visualizer";
+import visualizer from 'rollup-plugin-visualizer'
 
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-import path from 'path';
+import path from 'path'
 import {
 	ArcoResolver,
 	IduxResolver,
@@ -43,21 +41,22 @@ import {
 	AntDesignVueResolver,
 	VueUseComponentsResolver,
 } from 'unplugin-vue-components/resolvers'
-import Modules from 'vite-plugin-use-modules'
 import { GenerateTitle } from './plugins/html'
 import { AutoImportResolvers, normalizeResolvers } from './shared/resolvers'
 
 export default () => {
 	return [
 		legacy({
-			targets: ['defaults', 'not IE 11', 'chrome >= 49', 'firefox >= 1', 'edge > 1'],  //需要兼容的目标列表，可以设置多个
+			targets: [
+				'defaults',
+				'not IE 11',
+				'chrome >= 49',
+				'firefox >= 1',
+				'edge > 1',
+			], //需要兼容的目标列表，可以设置多个
 			additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
 			modernPolyfills: ['es.global-this'],
-			renderLegacyChunks: true
-		}),
-		// 模块自动加载
-		Modules({
-			auto: true,
+			renderLegacyChunks: true,
 		}),
 		// 生成 title
 		GenerateTitle(),
@@ -70,7 +69,7 @@ export default () => {
 		// 文件路由
 		Pages({
 			extensions: ['vue', 'md', 'tsx'],
-			exclude: ['**/pages/file.vue']
+			exclude: ['**/pages/file.vue'],
 			// extendRoute: route => {
 			// 	if (route.path === '/:storageKey/:fullpath(.*)') {
 			// 		route.path = '/:storageKey/:fullpath(.*)*'
@@ -97,8 +96,8 @@ export default () => {
 			compiler: 'vue3',
 			customCollections: {
 				// 这里是存放svg图标的文件地址，custom是自定义图标库的名称
-				custom: FileSystemIconLoader('./src/assets/icons')
-			}
+				custom: FileSystemIconLoader('./src/assets/icons'),
+			},
 		}),
 		// 组件自动按需引入
 		Components({
@@ -119,18 +118,23 @@ export default () => {
 					[IduxResolver(), '@idux/components'],
 					[TDesignResolver(), 'tdesign-vue-next'],
 					[InklineResolver(), '@inkline/inkline'],
-					[ElementPlusResolver({
-						importStyle: "sass",
-					}), 'element-plus'],
+					[
+						ElementPlusResolver({
+							importStyle: 'sass',
+						}),
+						'element-plus',
+					],
 					[HeadlessUiResolver(), '@headlessui/vue'],
 					[ArcoResolver(), '@arco-design/web-vue'],
 					[AntDesignVueResolver(), 'ant-design-vue'],
 					[VueUseComponentsResolver(), '@vueuse/components'],
 				],
-				include: [IconsResolver({
-					enabledCollections: ['ep'],
-					customCollections: ['custom']
-				})],
+				include: [
+					IconsResolver({
+						enabledCollections: ['ep'],
+						customCollections: ['custom'],
+					}),
+				],
 			}),
 		}),
 		// api 自动按需引入
@@ -141,7 +145,7 @@ export default () => {
 					env.VITE_APP_API_AUTO_IMPORT && 'src/composables',
 				],
 				dts: './presets/types/auto-imports.d.ts',
-				imports: ['vue', 'pinia', 'vue-i18n', 'vue-router', '@vueuse/core'],
+				imports: ['vue', 'pinia', 'vue-router', '@vueuse/core'],
 				resolvers: AutoImportResolvers,
 				eslintrc: {
 					enabled: true,
@@ -152,13 +156,7 @@ export default () => {
 		visualizer({
 			open: true,
 			gzipSize: true,
-			brotliSize: true
-		}),
-		// i18n 国际化支持
-		I18n({
-			runtimeOnly: true,
-			compositionOnly: true,
-			include: [resolve(__dirname, '../locales/**')],
+			brotliSize: true,
 		}),
 		// 预设热重启服务
 		ViteRestart({

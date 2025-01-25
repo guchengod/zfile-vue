@@ -2,8 +2,8 @@
 	"compilerOptions": {
 		"strict": true,
 		"jsx": "preserve",
-		"target": "es2015",
-		"module": "es2015",
+		"target": "es2022",
+		"module": "es2022",
 		"sourceMap": true,
 		"skipLibCheck": true,
 		"isolatedModules": true,

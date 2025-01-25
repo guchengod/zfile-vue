@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import BasicSetting from "~/pages/admin/download-link/basic-setting.vue";
+import BasicSetting from '~/pages/admin/download-link/basic-setting.vue'
 </script>
 
 <route lang="yaml">

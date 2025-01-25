@@ -9,13 +9,13 @@ export default defineConfig({
 		},
 	},
 	build: {
-		target: ['es2015'],
-		cssTarget: ['chrome49']
+		target: ['es2022'],
+		cssTarget: ['chrome49'],
 	},
 	define: {
-		'process.env': {}
+		'process.env': {},
 	},
-	server:{
+	server: {
 		host: '0.0.0.0',
 	},
 	plugins: [Tov()],

@@ -1,13 +1,13 @@
 <template>
-	<div class="editor" id="zfile-monaco-editor"/>
+	<div class="editor" id="zfile-monaco-editor" />
 </template>
 
 <script setup>
-import {onMounted, ref, onUnmounted} from 'vue';
+import { onMounted, ref, onUnmounted } from 'vue'
 
 // import * as monaco from 'monaco-editor';
 // 按需加载核心 api
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
 // 按需加载语法高亮
 import 'monaco-editor/esm/vs/basic-languages/html/html.contribution'
 import 'monaco-editor/esm/vs/basic-languages/css/css.contribution'
@@ -38,11 +38,11 @@ import 'monaco-editor/esm/vs/editor/contrib/find/browser/findController.js'
 //  fileName:   文件名
 const props = defineProps({
 	fileUrl: String,
-	fileName: String
-});
+	fileName: String,
+})
 
 // 文件内容
-const fileContent = ref('');
+const fileContent = ref('')
 
 // 定义 worker 加载
 // import EditorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
@@ -65,36 +65,45 @@ const fileContent = ref('');
 // 	},
 // };
 
-
-import { getFileTextReq, getFileTextFromServerReq } from "~/api/common";
+import { getFileTextReq, getFileTextFromServerReq } from '~/api/common'
 
 // 挂载时，加载文件内容，并初始化播放器
 onMounted(() => {
-	let fileUrl = props.fileUrl;
-	getFileTextReq(fileUrl).then((res) => {
-		fileContent.value = res.data;
-		initMonaco();
-	}).catch((e) => {
-		console.log(`默认加载文本文件: [${props.fileName}] - [${props.fileUrl}] 失败, 尝试从服务端加载.`, e);
-		getFileTextFromServerReq({url: fileUrl}).then((res) => {
-			fileContent.value = res.data;
-			initMonaco();
-		}).catch((e) => {
-			console.log(`从服务器端加载文本文件: [${props.fileName}] - [${props.fileUrl}] 失败.`, e);
-			alert('加载文件预览器失败，请检测文件下载链接是否正常');
+	let fileUrl = props.fileUrl
+	getFileTextReq(fileUrl)
+		.then((res) => {
+			fileContent.value = res.data
+			initMonaco()
 		})
-	});
-});
+		.catch((e) => {
+			console.log(
+				`默认加载文本文件: [${props.fileName}] - [${props.fileUrl}] 失败, 尝试从服务端加载.`,
+				e
+			)
+			getFileTextFromServerReq({ url: fileUrl })
+				.then((res) => {
+					fileContent.value = res.data
+					initMonaco()
+				})
+				.catch((e) => {
+					console.log(
+						`从服务器端加载文本文件: [${props.fileName}] - [${props.fileUrl}] 失败.`,
+						e
+					)
+					alert('加载文件预览器失败，请检测文件下载链接是否正常')
+				})
+		})
+})
 
 // 关闭时销毁所有组件
 onUnmounted(() => {
 	monaco.editor.getModels().forEach((item) => {
-		item.dispose();
+		item.dispose()
 	})
 })
 
-import useCommon from "~/composables/useCommon";
-const { isNotMobile } = useCommon();
+import useCommon from '~/composables/useCommon'
+const { isNotMobile } = useCommon()
 
 // 初始化编辑器
 let initMonaco = () => {
@@ -102,9 +111,9 @@ let initMonaco = () => {
 		fileContent.value,
 		undefined,
 		monaco.Uri.parse(props.fileName)
-	);
+	)
 
-	monaco.editor.create(document.getElementById("zfile-monaco-editor"), {
+	monaco.editor.create(document.getElementById('zfile-monaco-editor'), {
 		model: model,
 		// table 个数
 		tabSize: 4,
@@ -117,15 +126,14 @@ let initMonaco = () => {
 		// 只读
 		readOnly: true,
 		minimap: {
-			enabled: isNotMobile.value
+			enabled: isNotMobile.value,
 		},
-		lineNumbers: isNotMobile.value ? 'on' : 'off'
-	});
-};
+		lineNumbers: isNotMobile.value ? 'on' : 'off',
+	})
+}
 </script>
 
 <style lang="scss" scoped>
-
 #zfile-monaco-editor {
 	height: 80vh;
 	//:deep() {
