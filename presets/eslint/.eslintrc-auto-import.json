@@ -280,6 +280,7 @@
     "useModel": true,
     "useTemplateRef": true,
     "ElMessage": true,
-    "ElMessageBox": true
+    "ElMessageBox": true,
+    "ElLoading": true
   }
 }

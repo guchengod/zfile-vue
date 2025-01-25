@@ -1,8 +1,0 @@
-import { App } from 'vue'
-
-// animate 动画样式
-import 'animate.css/animate.min.css' //引入
-
-export default function(app: App) {
-    // 初始化动画相关配置
-}
