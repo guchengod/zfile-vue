@@ -1,9 +1,11 @@
-# Z-File
+# 说明
+此项目基于 [zfile](https://github.com/zfile-dev/zfile-vue)修改，仅用于学习目的。
 
-此仓库是 ZFile 4.0 前端 Vue 仓库, 使用技术为 Vue3、Pinia、VueRoute、Axios、Element Plus 等.
+# ZPan
 
-预览地址: [http://zfile.vip](http://zfile.vip)
-后端代码: [https://github.com/zhaojun1998/zfile](https://github.com/zhaojun1998/zfile)
+此仓库是 ZPan 4.0 前端 Vue 仓库, 使用技术为 Vue3、Pinia、VueRoute、Axios、Element Plus 等.
+
+后端代码: [https://github.com/guchengod/zpan](https://github.com/guchengod/zpan)
 
 ## 访问地址
 
