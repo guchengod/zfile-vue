@@ -1,10 +1,11 @@
 <template>
 	<img
-		id="zfile-home-logo"
-		@click="openLink"
 		v-if="storageConfigStore.globalConfig.siteHomeLogo"
-		:src="storageConfigStore.globalConfig.siteHomeLogo"
+		id="zfile-home-logo"
 		class="my-auto h-6 mr-2"
+		:src="storageConfigStore.globalConfig.siteHomeLogo"
+		alt="home"
+		@click="openLink"
 	/>
 </template>
 

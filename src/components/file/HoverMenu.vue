@@ -24,8 +24,8 @@
 						placement="top"
 					>
 						<svg-icon
-							@click="openRow(selectRow)"
 							name="tool-preview"
+							@click="openRow(selectRow)"
 						></svg-icon>
 					</el-tooltip>
 				</template>

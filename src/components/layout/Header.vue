@@ -277,10 +277,7 @@ import useSetting from '~/composables/header/useSetting'
 const { openSettingVisible } = useSetting()
 
 import useCommon from '~/composables/useCommon'
-const { isNotMobile, isMobile, encodeAllIgnoreSlashes } = useCommon()
-
-import useFileData from '~/composables/file/useFileData'
-let { initStorageConfig } = useFileData()
+const { isNotMobile, isMobile } = useCommon()
 
 // 监听存储源设置 -> 默认打开图片模式, 如果为是, 则打开图片模式.
 watch(
