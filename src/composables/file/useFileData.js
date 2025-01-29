@@ -40,6 +40,7 @@ const {
 	openText,
 	openVideo,
 	open3d,
+	openEpub,
 } = useFilePreview()
 
 // 文件操作相关
@@ -216,6 +217,9 @@ export default function useFileData() {
 					break
 				case 'three3d':
 					open3d(row)
+					break
+				case 'epub':
+					openEpub(row)
 					break
 				default:
 					batchDownloadFile(row)

@@ -41,18 +41,18 @@
 				v-loading="basicLoading"
 				element-loading-text="拼命加载中"
 				element-loading-background="rgba(255, 255, 255, 0.6)"
+				:size="storageConfigStore.globalConfig?.tableSize"
+				empty-text=""
+				:row-class-name="tableRowClassName"
+				:class="{ 'zfile-table-empty': fileDataStore.fileList.length === 0 }"
+				:data="skeletonLoading ? skeletonData : fileDataStore.fileList"
 				@sort-change="sortChangeMethod"
 				@row-click="tableClickRow"
 				@row-dblclick="tableDbClickRow"
 				@cell-mouse-enter="tableHoverRow"
 				@cell-mouse-leave="tableLeaveRow"
-				:size="storageConfigStore.globalConfig?.tableSize"
-				empty-text=""
 				@row-contextmenu="showFileMenu"
-				:row-class-name="tableRowClassName"
-				:class="{ 'zfile-table-empty': fileDataStore.fileList.length === 0 }"
 				@selection-change="selectRowsChange"
-				:data="skeletonLoading ? skeletonData : fileDataStore.fileList"
 			>
 				<template #empty>
 					<div v-show="!basicLoading">
@@ -109,8 +109,8 @@
 				</el-table-column>
 
 				<el-table-column
-					prop="time"
 					v-if="isNotMobile"
+					prop="time"
 					sortable="custom"
 					class-name="zfile-table-col-time"
 					min-width="25%"
@@ -136,8 +136,8 @@
 				</el-table-column>
 
 				<el-table-column
-					prop="size"
 					v-if="isNotMobile"
+					prop="size"
 					class-name="zfile-table-col-size"
 					sortable="custom"
 					min-width="20%"
@@ -175,79 +175,93 @@
 
 			<!-- 视频播放器 -->
 			<el-dialog
+				v-model="dialogVideoVisible"
 				draggable
 				class="zfile-video-dialog"
 				:destroy-on-close="true"
-				v-model="dialogVideoVisible"
 			>
 				<video-player v-if="dialogVideoVisible" ref="videoPlayer" />
 			</el-dialog>
 
 			<!-- 文本编辑器 -->
 			<el-dialog
+				v-model="dialogTextVisible"
 				draggable
 				class="zfile-text-dialog zfile-dialog-mini-close"
 				:destroy-on-close="true"
 				:title="fileDataStore.currentClickRow.name"
-				v-model="dialogTextVisible"
 			>
 				<TextViewer
-					:file-name="fileDataStore.currentClickRow.name"
-					:file-url="fileDataStore.currentClickRow.url"
 					v-if="
 						dialogTextVisible &&
 						fileDataStore.currentClickRow.name.indexOf('.md') === -1
 					"
-				/>
-				<MarkdownViewer
 					:file-name="fileDataStore.currentClickRow.name"
 					:file-url="fileDataStore.currentClickRow.url"
+				/>
+				<MarkdownViewer
 					v-if="
 						dialogTextVisible &&
 						fileDataStore.currentClickRow.name.indexOf('.md') !== -1
 					"
+					:file-name="fileDataStore.currentClickRow.name"
+					:file-url="fileDataStore.currentClickRow.url"
+				/>
+			</el-dialog>
+
+			<!-- epub 在线预览 -->
+			<el-dialog
+				v-model="dialogEpubVisible"
+				draggable
+				class="zfile-epub-dialog"
+				:title="fileDataStore.currentClickRow.name"
+			>
+				<EpubPreview
+					v-if="dialogEpubVisible"
+					:file-name="fileDataStore.currentClickRow.name"
+					:file-url="fileDataStore.currentClickRow.url"
 				/>
 			</el-dialog>
 
 			<!-- pdf 在线预览 -->
 			<el-dialog
+				v-model="dialogPdfVisible"
 				draggable
 				class="zfile-pdf-dialog"
 				:title="fileDataStore.currentClickRow.name"
-				v-model="dialogPdfVisible"
 			>
 				<PdfViewer
+					v-if="dialogPdfVisible"
 					:file-name="fileDataStore.currentClickRow.name"
 					:file-url="fileDataStore.currentClickRow.url"
-					v-if="dialogPdfVisible"
 				/>
 			</el-dialog>
 
 			<!-- office 在线预览 -->
 			<el-dialog
+				v-model="dialogOfficeVisible"
 				draggable
 				class="zfile-office-dialog zfile-dialog-mini-close zfile-dialog-hidden-title"
 				:title="fileDataStore.currentClickRow.name"
-				v-model="dialogOfficeVisible"
 			>
 				<OfficeViewer
+					v-if="dialogOfficeVisible"
 					:file-name="fileDataStore.currentClickRow.name"
 					:file-url="fileDataStore.currentClickRow.url"
-					v-if="dialogOfficeVisible"
 				/>
 			</el-dialog>
 
 			<!-- 3d 在线预览 -->
 			<el-dialog
+				v-model="dialog3dVisible"
 				draggable
 				class="zfile-3d-dialog"
 				:title="fileDataStore.currentClickRow.name"
-				v-model="dialog3dVisible"
 			>
 				<Three3dPreview
+					v-if="dialog3dVisible"
 					:file-name="fileDataStore.currentClickRow.name"
 					:file-url="fileDataStore.currentClickRow.url"
-					v-if="dialog3dVisible"
 				/>
 			</el-dialog>
 
@@ -268,16 +282,16 @@
 
 			<!-- 弹窗文档 -->
 			<el-dialog
-				draggable
-				@close="readmeDialogClose"
-				class="zfile-readme-dialog zfile-dialog-mini-close zfile-dialog-hidden-title"
 				v-if="
 					storageConfigStore.globalConfig.showDocument &&
 					storageConfigStore.folderConfig.readmeText &&
 					storageConfigStore.folderConfig.readmeDisplayMode === 'dialog' &&
 					showDialog(storageConfigStore.folderConfig.readmeText)
 				"
+				draggable
+				class="zfile-readme-dialog zfile-dialog-mini-close zfile-dialog-hidden-title"
 				:model-value="true"
+				@close="readmeDialogClose"
 			>
 				<v-md-preview
 					:text="storageConfigStore.folderConfig.readmeText"
@@ -286,13 +300,13 @@
 
 			<!-- 底部文档 -->
 			<el-card
-				class="mt-5"
 				v-if="
 					storageConfigStore.globalConfig.showDocument &&
 					route.params.storageKey &&
 					storageConfigStore.folderConfig.readmeText &&
 					storageConfigStore.folderConfig.readmeDisplayMode === 'bottom'
 				"
+				class="mt-5"
 			>
 				<v-md-preview
 					:text="storageConfigStore.folderConfig.readmeText"
@@ -332,7 +346,9 @@ import useFileLink from '~/composables/file/useFileLink'
 // 表格相关基础操作
 import useTableOperator from '~/composables/file/useTableOperator'
 // 文件预览相关
-import useFilePreview from '~/composables/file/useFilePreview'
+import useFilePreview, {
+	dialogEpubVisible,
+} from '~/composables/file/useFilePreview'
 
 import useCommon from '~/composables/useCommon'
 import useFileSelect from '~/composables/file/useFileSelect'
@@ -388,6 +404,11 @@ const OfficeViewer = defineAsyncComponent({
 })
 const Three3dPreview = defineAsyncComponent({
 	loader: () => import('~/components/file/preview/Three3dPreview.vue'),
+	loadingComponent: MarkdownViewerDialogAsyncLoading,
+})
+
+const EpubPreview = defineAsyncComponent({
+	loader: () => import('~/components/file/preview/EpubViewer.vue'),
 	loadingComponent: MarkdownViewerDialogAsyncLoading,
 })
 

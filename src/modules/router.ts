@@ -1,4 +1,3 @@
-import type { App } from 'vue'
 import fileRoutes from '~pages'
 import { setupLayouts } from 'virtual:meta-layouts'
 import { createRouter, createWebHistory } from 'vue-router'
@@ -26,9 +25,8 @@ routes.push({
 	path: '/admin',
 	redirect: '/admin/site-setting',
 })
+
 export const router = createRouter({
 	routes: routes,
 	history: createWebHistory(),
 })
-
-export default (app: App) => app.use(router)

@@ -31,6 +31,7 @@ const fileTypeMap = {
 	executable: ['exe', 'dll', 'com', 'vbs'],
 	archive: ['7z', 'zip', 'rar', 'tar', 'gz'],
 	pdf: ['pdf'],
+	epub: ['epub'],
 	office: ['doc', 'docx', 'csv', 'xls', 'xlsx', 'ppt', 'pptx'],
 	three3d: ['dae', 'fbx', 'gltf', 'glb', 'obj', 'ply', 'stl'],
 	document: ['txt', 'pages', 'epub', 'numbers', 'keynote'],
@@ -45,6 +46,7 @@ const previewFileType = [
 	'office',
 	'pdf',
 	'three3d',
+	'epub',
 ]
 
 import config from '/package.json'

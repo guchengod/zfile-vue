@@ -55,6 +55,7 @@ declare module 'vue' {
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElUpload: typeof import('element-plus/es')['ElUpload']
+    EpubViewer: typeof import('./../../src/components/file/preview/epubViewer.vue')['default']
     FileGallery: typeof import('./../../src/components/file/preview/FileGallery.vue')['default']
     Footer: typeof import('./../../src/components/layout/Footer.vue')['default']
     GenerateLink: typeof import('./../../src/components/file/GenerateLink.vue')['default']

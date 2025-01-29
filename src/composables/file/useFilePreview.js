@@ -17,6 +17,8 @@ export let dialogOfficeVisible = ref(false)
 export let dialogPdfVisible = ref(false)
 // 3d 预览
 export let dialog3dVisible = ref(false)
+// epub预览
+export let dialogEpubVisible = ref(false)
 
 export default function useFilePreview() {
 	const openVideo = () => {
@@ -65,6 +67,10 @@ export default function useFilePreview() {
 		dialog3dVisible.value = true
 	}
 
+	const openEpub = () => {
+		dialogEpubVisible.value = true
+	}
+
 	return {
 		openVideo,
 		dialogVideoVisible,
@@ -78,5 +84,7 @@ export default function useFilePreview() {
 		dialogPdfVisible,
 		open3d,
 		dialog3dVisible,
+		openEpub,
+		dialogEpubVisible,
 	}
 }
