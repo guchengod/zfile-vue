@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- 背景圆形 -->
+  <circle cx="50" cy="50" r="48" stroke="black" stroke-width="2" fill="#4a90e2" />
+  
+  <!-- 书本形状 -->
+  <rect x="20" y="20" width="60" height="60" rx="5" ry="5" fill="white" stroke="black" stroke-width="2"/>
+  
+  <!-- 书脊 -->
+  <rect x="47" y="20" width="6" height="60" fill="#333" />
+  
+  <!-- 书页 -->
+  <line x1="30" y1="30" x2="70" y2="30" stroke="#bbb" stroke-width="1" />
+  <line x1="30" y1="40" x2="70" y2="40" stroke="#bbb" stroke-width="1" />
+  <line x1="30" y1="50" x2="70" y2="50" stroke="#bbb" stroke-width="1" />
+  <line x1="30" y1="60" x2="70" y2="60" stroke="#bbb" stroke-width="1" />
+  <line x1="30" y1="70" x2="70" y2="70" stroke="#bbb" stroke-width="1" />
+
+  <!-- 添加EPUB字样背景框 -->
+  <rect x="30" y="75" width="40" height="15" rx="3" ry="3" fill="#333" />
+  
+  <!-- 添加EPUB字样 -->
+  <text x="50" y="85" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">EPUB</text>
+</svg>
