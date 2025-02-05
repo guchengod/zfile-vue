@@ -126,7 +126,6 @@ import {
 	XCircleIcon,
 	CheckCircleIcon,
 } from '@heroicons/vue/24/solid'
-import { defineProps, defineEmits } from 'vue'
 import { MessageType } from './types'
 
 const props = defineProps({
