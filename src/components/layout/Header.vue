@@ -136,7 +136,7 @@
 				<!--				</el-select>-->
 				<el-input v-model="searchThing" clearable placeholder="搜索...">
 					<template #append>
-						<el-button :onclick="doSearching" :icon="Search" />
+						<el-button :onclick="doSearch" :icon="Search" />
 					</template>
 				</el-input>
 			</div>
@@ -369,9 +369,13 @@ onMounted(() => {
 
 const searchThing = ref('')
 
-function doSearching() {
+import { doSearching } from '~/api/header'
+function doSearch() {
 	let searchVal = searchThing.value
-
+	doSearching({ searchVal: searchVal }).then((response) => {
+		let data = response.data
+		fileDataStore.updateFileList(data)
+	})
 }
 </script>
 
