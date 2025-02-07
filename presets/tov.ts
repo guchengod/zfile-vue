@@ -165,7 +165,7 @@ export default () => {
 		// tsx 支持
 		vueJsx(),
 		// 生产环境资源压缩
-		compression({ algorithm: 'gzip' }),
+		compression({ algorithm: 'brotliCompress', threshold: 10240 }),
 		// 生产环境下移除 console.log, console.warn, console.error
 		// Removelog({
 		//
