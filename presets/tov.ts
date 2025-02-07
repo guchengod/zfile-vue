@@ -14,7 +14,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 import Components from 'unplugin-vue-components/vite'
-import viteCompression from 'vite-plugin-compression'
+import compression from 'vite-plugin-compression2'
 // import { markdownWrapperClasses } from './plugins/markdown'
 import legacy from '@vitejs/plugin-legacy'
 
@@ -165,11 +165,7 @@ export default () => {
 		// tsx 支持
 		vueJsx(),
 		// 生产环境资源压缩
-		viteCompression({
-			disable: true,
-			// @ts-ignore
-			algorithm: env.VITE_APP_COMPRESSINON_ALGORITHM,
-		}),
+		compression({ algorithm: 'gzip' }),
 		// 生产环境下移除 console.log, console.warn, console.error
 		// Removelog({
 		//

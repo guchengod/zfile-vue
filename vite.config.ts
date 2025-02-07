@@ -33,6 +33,21 @@ export default defineConfig(({ mode }) => {
 						: [],
 				},
 			},
+			// rollupOptions: {
+			// 	output: {
+			// 		manualChunks(id) {
+			// 			if (id.includes('node_modules')) {
+			// 				return 'vendor' // 将第三方依赖单独拆分
+			// 			}
+			// 			if (id.includes('PdfViewer')) {
+			// 				return 'pdf-viewer' // PdfViewer 独立成一个 chunk
+			// 			}
+			// 			if (id.includes('TextViewer')) {
+			// 				return 'text-viewer' // TextViewer 独立成一个 chunk
+			// 			}
+			// 		},
+			// 	},
+			// },
 		},
 		css: {
 			devSourcemap: !isProduction,

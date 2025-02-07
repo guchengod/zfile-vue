@@ -132,7 +132,7 @@
 					</el-table-column>
 				</el-table>
 
-				<el-config-provider :locale="zhCn">
+				<el-config-provider>
 					<el-pagination
 						class="mt-3"
 						:page-size="searchParam.limit"
@@ -170,7 +170,6 @@ import {
 	deleteShortLink,
 	getShortLinkList,
 } from '~/api/admin-download-link'
-import zhCn from 'element-plus/lib/locale/lang/zh-cn'
 import moment from 'moment'
 
 import { Search, Delete, Download } from '@element-plus/icons-vue'
