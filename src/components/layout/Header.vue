@@ -121,19 +121,24 @@
 
 			<!-- 存储源选择 -->
 			<div class="zfile-header-storage-select" v-if="isNotMobile">
-				<el-select
-					size="default"
-					v-model="currentStorageKey"
-					placeholder="请选择存储源"
-				>
-					<el-option
-						v-for="item in storageList"
-						:key="item.key"
-						:label="item.name"
-						:value="item.key"
-					>
-					</el-option>
-				</el-select>
+				<!--				<el-select-->
+				<!--					size="default"-->
+				<!--					v-model="currentStorageKey"-->
+				<!--					placeholder="请选择存储源"-->
+				<!--				>-->
+				<!--					<el-option-->
+				<!--						v-for="item in storageList"-->
+				<!--						:key="item.key"-->
+				<!--						:label="item.name"-->
+				<!--						:value="item.key"-->
+				<!--					>-->
+				<!--					</el-option>-->
+				<!--				</el-select>-->
+				<el-input v-model="searchThing" clearable placeholder="搜索...">
+					<template #append>
+						<el-button :onclick="doSearching" :icon="Search" />
+					</template>
+				</el-input>
 			</div>
 		</div>
 
@@ -314,6 +319,7 @@ if (storageConfigStore.globalConfig.customCss) {
 	}
 }
 import HeaderLogo from '~/components/file/HeaderLogo.vue'
+import { Search } from '@element-plus/icons-vue'
 
 const loadScriptDom = (scriptDom) => {
 	if (scriptDom) {
@@ -360,6 +366,13 @@ onMounted(() => {
 		}
 	})
 })
+
+const searchThing = ref('')
+
+function doSearching() {
+	let searchVal = searchThing.value
+
+}
 </script>
 
 <style scoped lang="scss">

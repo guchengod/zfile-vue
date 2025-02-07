@@ -17,3 +17,11 @@ export const getSourceListReq = (data) => {
 		data,
 	})
 }
+
+export const doSearching = (data) => {
+	return axios({
+		url: '/api/storage/files',
+		method: 'post',
+		data,
+	})
+}
