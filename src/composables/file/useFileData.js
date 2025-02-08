@@ -100,6 +100,7 @@ export default function useFileData() {
 		param.orderDirection =
 			searchParam.orderDirection ||
 			storageConfigStore.globalConfig.defaultSortOrder
+		param.searchVal = initParam?.searchVal || ''
 
 		let requestStorageId = storageKey.value
 		loadFileListReq(param)

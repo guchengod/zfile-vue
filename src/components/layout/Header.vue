@@ -320,6 +320,7 @@ if (storageConfigStore.globalConfig.customCss) {
 }
 import HeaderLogo from '~/components/file/HeaderLogo.vue'
 import { Search } from '@element-plus/icons-vue'
+import useFileData from '~/composables/file/useFileData'
 
 const loadScriptDom = (scriptDom) => {
 	if (scriptDom) {
@@ -367,15 +368,13 @@ onMounted(() => {
 	})
 })
 
+const { loadFile } = useFileData()
+
 const searchThing = ref('')
 
-import { doSearching } from '~/api/header'
 function doSearch() {
 	let searchVal = searchThing.value
-	doSearching({ searchVal: searchVal }).then((response) => {
-		let data = response.data
-		fileDataStore.updateFileList(data)
-	})
+	loadFile({ searchVal: searchVal })
 }
 </script>
 
