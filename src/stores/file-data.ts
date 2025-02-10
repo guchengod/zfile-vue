@@ -25,6 +25,7 @@ const useFileDataStore = defineStore('fileDataStore', {
 			loadFileSize: -1,
 			audioArray: [],
 			audioIndex: 0,
+			searchVal: '',
 		}
 	},
 	getters: {
@@ -104,6 +105,9 @@ const useFileDataStore = defineStore('fileDataStore', {
 		},
 		updateLoadFileSize(val: number) {
 			this.loadFileSize = val
+		},
+		updateSearchVal(val: string) {
+			this.searchVal = val
 		},
 	},
 })

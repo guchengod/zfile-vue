@@ -131,7 +131,7 @@ export default function useFileData() {
 						type: 'BACK',
 					})
 				}
-
+				fileDataStore.updateSearchVal(response.data.searchVal)
 				fileDataStore.updateFileList(fileList)
 				loading.value = false
 				firstLoading.value = true

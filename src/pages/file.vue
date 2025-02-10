@@ -103,7 +103,15 @@
 						</div>
 						<div v-show="!skeletonLoading">
 							<svg-icon :name="'file-type-' + scope.row.icon"></svg-icon>
-							{{ scope.row.name }}
+							<!--							{{ scope.row.name }}-->
+							<template
+								v-for="(part, index) in highlightedName(scope.row.name)"
+								:key="index"
+							>
+								<span :class="part.highlighted ? 'highlighted-text' : ''">{{
+									part.text
+								}}</span>
+							</template>
 						</div>
 					</template>
 				</el-table-column>
@@ -354,6 +362,35 @@ import useCommon from '~/composables/useCommon'
 import useFileSelect from '~/composables/file/useFileSelect'
 // 文件上传相关
 import useRouterData from '~/composables/useRouterData'
+
+const highlightedName = (name) => {
+	console.log(fileDataStore.searchVal, 367)
+	if (!fileDataStore.searchVal) {
+		return [{ text: name, highlighted: false }]
+	}
+
+	const parts = []
+	let lastIndex = 0
+	const regex = new RegExp(fileDataStore.searchVal, 'gi')
+	let match
+
+	while ((match = regex.exec(name)) !== null) {
+		if (match.index > lastIndex) {
+			parts.push({
+				text: name.substring(lastIndex, match.index),
+				highlighted: false,
+			})
+		}
+		parts.push({ text: match[0], highlighted: true })
+		lastIndex = match.index + match[0].length
+	}
+
+	if (lastIndex < name.length) {
+		parts.push({ text: name.substring(lastIndex), highlighted: false })
+	}
+
+	return parts
+}
 
 // markdown viewer 组件懒加载, 节约首屏打开时间
 const VMdPreview = defineAsyncComponent({
@@ -725,6 +762,11 @@ const showDialog = (readmeText) => {
 			@apply p-0;
 		}
 	}
+}
+
+.highlighted-text {
+	background-color: #ffeb3b;
+	font-weight: bold;
 }
 </style>
 
