@@ -57,7 +57,11 @@
 				<template #empty>
 					<div v-show="!basicLoading">
 						<svg-icon class="empty-icon" name="empty" />
-						<div class="font-bold text-base">数据为空，请先上传或添加文件</div>
+						{{
+							fileDataStore.searchVal === ''
+								? '数据为空，请先上传或添加文件'
+								: '没有搜索到数据'
+						}}
 					</div>
 				</template>
 
